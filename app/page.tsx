@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Logo from './logo.svg';
 
 export default function Home() {
   const [username, setUsername] = useState('cyronlee');
@@ -35,9 +36,12 @@ export default function Home() {
       <main className="mx-auto max-w-5xl px-6 py-16">
         {/* Header */}
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-5xl font-bold text-zinc-900 dark:text-zinc-50">
-            GitHub Contributions Image
-          </h1>
+          <div className="mb-4 flex items-center justify-center gap-3">
+            <Image src={Logo} alt="Logo" width={48} height={48} />
+            <h1 className="text-5xl font-bold text-zinc-900 dark:text-zinc-50">
+              GitHub Contributions Image
+            </h1>
+          </div>
           <p className="text-lg text-zinc-600 dark:text-zinc-400">
             Generate beautiful contribution charts from any GitHub profile
           </p>
