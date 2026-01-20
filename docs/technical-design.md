@@ -39,10 +39,12 @@
 
 **参数**:
 - `username` (必填): GitHub 用户名
-- `range` (可选): 时间范围
-  - `nm`: 最近 n 个月（如 `6m`）
-  - `ny`: 最近 n 年（如 `1y`）
+- `range` (可选): 时间范围，格式为 `{n}{unit}`
+  - `{n}w`: 最近 n 周（如 `2w`, `4w`）
+  - `{n}m`: 最近 n 个月（如 `6m`, `12m`）
+  - `{n}y`: 最近 n 年（如 `1y`, `2y`）
   - 不传则返回全部数据
+  - 注意：返回的数据起始日期会自动调整到周一，以确保图表渲染对齐
 
 **响应格式**:
 ```json
@@ -94,6 +96,8 @@ export async function fetchContributions(
   range?: string
 ): Promise<ContributionsData>
 
+// 解析时间范围，支持 {n}w (周), {n}m (月), {n}y (年)
+// 返回的日期会自动调整到周一
 export function parseTimeRange(range?: string): Date | null
 ```
 
@@ -254,6 +258,9 @@ bun run test:watch  # 监听模式
 ### 7.1 获取数据
 
 ```bash
+# 获取最近 2 周数据
+curl "https://your-domain.com/api/v1/data?username=cyronlee&range=2w"
+
 # 获取最近 6 个月数据
 curl "https://your-domain.com/api/v1/data?username=cyronlee&range=6m"
 

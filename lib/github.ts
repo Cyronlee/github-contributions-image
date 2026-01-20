@@ -116,25 +116,46 @@ async function fetchDataForYear(
 }
 
 /**
- * Parse time range string (e.g., "6m", "1y") and return start date
+ * Adjust date to the previous Monday (or same day if already Monday)
+ * This ensures the chart always starts from a Monday for proper alignment
+ */
+function adjustToMonday(date: Date): Date {
+  const day = date.getDay();
+  // Sunday is 0, Monday is 1, etc.
+  // If it's Sunday (0), go back 6 days
+  // If it's Monday (1), stay
+  // If it's Tuesday (2), go back 1 day, etc.
+  const daysToSubtract = day === 0 ? 6 : day - 1;
+  const adjustedDate = new Date(date);
+  adjustedDate.setDate(adjustedDate.getDate() - daysToSubtract);
+  return adjustedDate;
+}
+
+/**
+ * Parse time range string (e.g., "2w", "6m", "1y") and return start date
+ * Supports: {n}w (weeks), {n}m (months), {n}y (years)
+ * The returned start date is always adjusted to a Monday for chart alignment
  */
 export function parseTimeRange(range?: string): Date | null {
   if (!range) return null;
 
-  const match = range.match(/^(\d+)(m|y)$/);
+  const match = range.match(/^(\d+)(w|m|y)$/);
   if (!match) return null;
 
   const [, amount, unit] = match;
   const now = new Date();
   const startDate = new Date();
 
-  if (unit === 'm') {
+  if (unit === 'w') {
+    startDate.setDate(now.getDate() - parseInt(amount, 10) * 7);
+  } else if (unit === 'm') {
     startDate.setMonth(now.getMonth() - parseInt(amount, 10));
   } else if (unit === 'y') {
     startDate.setFullYear(now.getFullYear() - parseInt(amount, 10));
   }
 
-  return startDate;
+  // Adjust to Monday for proper chart alignment
+  return adjustToMonday(startDate);
 }
 
 /**

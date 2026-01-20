@@ -21,17 +21,11 @@ export default function Home() {
 
   const rangeOptions = [
     { value: '', label: 'All time' },
+    { value: '2w', label: '2 weeks' },
+    { value: '4w', label: '4 weeks' },
     { value: '1m', label: '1 month' },
-    { value: '2m', label: '2 months' },
     { value: '3m', label: '3 months' },
-    { value: '4m', label: '4 months' },
-    { value: '5m', label: '5 months' },
     { value: '6m', label: '6 months' },
-    { value: '7m', label: '7 months' },
-    { value: '8m', label: '8 months' },
-    { value: '9m', label: '9 months' },
-    { value: '10m', label: '10 months' },
-    { value: '11m', label: '11 months' },
     { value: '1y', label: '1 year' },
     { value: '2y', label: '2 years' },
   ];
@@ -235,8 +229,9 @@ export default function Home() {
                     </td>
                     <td className="py-2 pr-4">string (optional)</td>
                     <td className="py-2">
-                      Time range: <code>1m</code>-<code>11m</code>, <code>1y</code>,{' '}
-                      <code>2y</code>
+                      Time range: <code>{'{n}w'}</code> (weeks), <code>{'{n}m'}</code> (months),{' '}
+                      <code>{'{n}y'}</code> (years). e.g., <code>2w</code>, <code>6m</code>,{' '}
+                      <code>1y</code>
                     </td>
                   </tr>
                   <tr>
@@ -306,8 +301,9 @@ export default function Home() {
                     </td>
                     <td className="py-2 pr-4">string (optional)</td>
                     <td className="py-2">
-                      Time range: <code>1m</code>-<code>11m</code>, <code>1y</code>,{' '}
-                      <code>2y</code>
+                      Time range: <code>{'{n}w'}</code> (weeks), <code>{'{n}m'}</code> (months),{' '}
+                      <code>{'{n}y'}</code> (years). e.g., <code>2w</code>, <code>6m</code>,{' '}
+                      <code>1y</code>
                     </td>
                   </tr>
                 </tbody>
@@ -374,7 +370,7 @@ export default function Home() {
               <li className="flex items-start">
                 <span className="mr-2">•</span>
                 <span>
-                  <strong className="text-zinc-900 dark:text-zinc-50">Flexible:</strong> Multiple
+                  <strong className="text-zinc-900 dark:text-zinc-50">Flexible:</strong> Customizable
                   time ranges and themes
                 </span>
               </li>
