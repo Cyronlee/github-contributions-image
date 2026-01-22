@@ -2,7 +2,7 @@
 
 Generate beautiful GitHub contribution charts as PNG images for embedding in your README, blog, or website.
 
-![GitHub Contributions](https://github-contributions-image.vercel.app/api/v1/image?username=cyronlee&range=1y&theme=light)
+![GitHub Contributions](https://gh.cyron.space/api/v1/image?username=cyronlee&range=1y&theme=light)
 
 ## Features
 
