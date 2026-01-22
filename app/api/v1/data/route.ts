@@ -14,9 +14,9 @@ export async function GET(request: NextRequest) {
   }
 
   // Validate range format if provided
-  if (range && !/^\d+(m|y)$/.test(range)) {
+  if (range && !/^\d+(w|m|y)$/.test(range)) {
     return NextResponse.json(
-      { error: 'Invalid range format. Use format like "6m" or "1y"' },
+      { error: 'Invalid range format. Use format like "2w", "6m" or "1y"' },
       { status: 400 }
     );
   }

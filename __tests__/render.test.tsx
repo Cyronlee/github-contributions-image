@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { renderContributionsImage, organizeContributions, calculateImageDimensions } from '@/lib/render';
+import { renderContributionsImage, renderErrorImage, organizeContributions, calculateImageDimensions } from '@/lib/render';
 import { mockContributionsData, generateMockContributions } from './fixtures/contributions';
 
 // Mock @vercel/og for testing
@@ -55,6 +55,28 @@ describe('renderContributionsImage', () => {
     const result = await renderContributionsImage({
       data: largeData,
     });
+
+    expect(result).toBeDefined();
+  });
+});
+
+describe('renderErrorImage', () => {
+  it('should render error image with default light theme', async () => {
+    const result = await renderErrorImage('Test error message');
+
+    expect(result).toBeDefined();
+    expect(result).toHaveProperty('body');
+  });
+
+  it('should render error image with dark theme', async () => {
+    const result = await renderErrorImage('Test error message', 'dark');
+
+    expect(result).toBeDefined();
+  });
+
+  it('should handle long error messages', async () => {
+    const longMessage = 'This is a very long error message that should still be properly rendered in the error image';
+    const result = await renderErrorImage(longMessage);
 
     expect(result).toBeDefined();
   });

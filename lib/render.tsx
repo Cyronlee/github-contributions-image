@@ -305,5 +305,64 @@ export async function renderContributionsImage(
   });
 }
 
+/**
+ * Render an error message as an image
+ */
+export async function renderErrorImage(
+  errorMessage: string,
+  theme: ThemeName = 'light'
+): Promise<ImageResponse> {
+  const themeColors = getTheme(theme);
+  const width = 800;
+  const height = 200;
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: themeColors.background,
+          width: '100%',
+          height: '100%',
+          padding: 40,
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            color: themeColors.text,
+            fontSize: 24,
+            fontWeight: 600,
+          }}
+        >
+          <span style={{ fontSize: 40 }}>⚠️</span>
+          <span>Error</span>
+        </div>
+        <div
+          style={{
+            color: themeColors.text,
+            fontSize: 18,
+            marginTop: 20,
+            textAlign: 'center',
+            opacity: 0.8,
+          }}
+        >
+          {errorMessage}
+        </div>
+      </div>
+    ),
+    {
+      width,
+      height,
+    }
+  );
+}
+
 // Export for testing
 export { organizeContributions, ContributionGraph };
